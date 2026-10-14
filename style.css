@@ -1,0 +1,700 @@
+
+/* --- 1. 一般設定と変数 --- */
+:root {
+    --primary-color: #17a2b8; /* サイバーブルー */
+    --secondary-color: #6c757d; 
+    --accent-color: #38c172; /* アクセントカラー */
+    --text-color: #333;
+    --bg-color: #f0f2f5; 
+    --card-bg: #ffffff; 
+    --font-family: 'Poppins', 'Noto Sans JP', sans-serif; 
+    --shadow-light: 0 4px 15px rgba(0, 0, 0, 0.08); 
+}
+
+/* ダークモード設定 */
+.dark-mode {
+    --text-color: #e9ecef;
+    --bg-color: #1a1a1a;
+    --card-bg: #2d2d2d;
+    --primary-color: #00bcd4; 
+    --secondary-color: #adb5bd;
+    --shadow-light: 0 4px 15px rgba(0, 0, 0, 0.4); 
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: var(--font-family);
+    line-height: 1.8; 
+    color: var(--text-color);
+    background-color: var(--bg-color);
+    transition: background-color 0.4s, color 0.4s; 
+    padding-top: 80px; 
+    letter-spacing: 0.03em; /* 文字と文字の間に少しゆとりを持たせる */
+    word-break: break-all; /* 日本語の改行を自然にする */
+    
+}
+
+a {
+    color: var(--primary-color);
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+a:hover {
+    color: var(--secondary-color);
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+body.dark-mode .certmaster-table tbody tr:hover {
+    background-color: rgba(23, 162, 184, 0.15); /* ライトモードより少し濃くして目立たせる */
+}
+
+body.dark-mode .lab-summary {
+    background-color: rgba(23, 162, 184, 0.15);
+}
+
+/* --- 2. ヘッダーとナビゲーション --- */
+.hero-section {
+    background: var(--bg-color);
+    padding-bottom: 30px;
+    text-align: center;
+    background: linear-gradient(135deg, var(--bg-color) 70%, rgba(23, 162, 184, 0.05) 100%);
+}
+.hero-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 15px; /* ボタン間の隙間を均等にする */
+    flex-wrap: wrap; /* スマホで画面が狭い場合は縦並びになるよう配慮 */
+}
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 0;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;    
+    background-color: var(--card-bg);
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    transition: background-color 0.4s;
+    padding-left: 5%;
+    padding-right: 5%;
+    height: 80px;
+}
+
+.dark-mode .navbar {
+    box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+}
+
+.logo a.minimal-logo {
+    display: flex;
+    align-items: center;
+    height: 40px; 
+}
+
+.logo-icon {
+    width: 40px;
+    height: 40px;
+    transition: transform 0.3s ease, opacity 0.3s;
+}
+
+.logo a.minimal-logo:hover .logo-icon {
+    transform: rotate(5deg) scale(1.1);
+    opacity: 0.9;
+}
+
+.logo-icon path, .logo-icon line { stroke: var(--primary-color); }
+.logo-icon text { fill: var(--primary-color); }
+
+.nav-links {
+    list-style: none;
+    display: flex;
+    align-items: center;
+}
+
+.nav-links li {
+    margin-left: 20px;
+}
+
+.nav-links a {
+    font-weight: 600;
+    padding: 5px 10px;
+    font-size: 0.95rem;
+}
+
+.dark-mode-btn {
+    background: none;
+    border: 1px solid var(--secondary-color);
+    color: var(--text-color);
+    cursor: pointer;
+    padding: 8px 12px;
+    border-radius: 5px;
+    margin-left: 15px;
+    transition: all 0.3s;
+}
+
+.dark-mode-btn:hover {
+    background-color: var(--primary-color);
+    color: white;
+}
+
+.burger-menu {
+    display: none; 
+    font-size: 1.5rem;
+    cursor: pointer;
+    color: var(--primary-color);
+}
+
+.profile-picture {
+    width: 180px; 
+    height: 180px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-top: 40px;
+    padding: 5px; 
+    border: 3px solid var(--primary-color);
+    background: var(--card-bg);
+    box-shadow: 0 0 0 5px rgba(23, 162, 184, 0.2), 0 10px 20px rgba(0,0,0,0.1); 
+    transition: transform 0.3s;
+}
+
+.profile-picture:hover {
+    transform: scale(1.05);
+}
+
+.hero-content h1 {
+    font-size: 2.8rem;
+    margin-top: 15px;
+    font-weight: 700;
+}
+
+.tagline {
+    font-size: 1.2rem;
+    color: var(--secondary-color);
+    margin-bottom: 30px;
+    font-weight: 600; 
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.btn {
+    display: inline-block;
+    padding: 10px 25px;
+    border-radius: 30px;
+    font-weight: 600;
+    transition: background-color 0.3s, transform 0.2s;
+    text-align: center;
+}
+
+.primary-btn {
+    background-color: var(--primary-color);
+    color: white;
+}
+
+.primary-btn:hover {
+    background-color: #138496;
+    transform: translateY(-2px);
+    color: white;
+}
+
+.secondary-btn {
+    border: 1px solid var(--primary-color);
+    color: var(--primary-color);
+}
+
+.secondary-btn:hover {
+    background-color: var(--primary-color);
+    color: #fff;
+    transform: translateY(-2px);
+}
+
+/* Resume Button Style */
+.resume-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    background-color: var(--card-bg);
+    border: 1px solid var(--primary-color);
+    color: var(--primary-color);
+}
+.resume-btn:hover {
+    color: white;
+}
+
+/* --- 3. セクション共通設定 --- */
+.section-padding {
+    padding: 80px 0;
+}
+
+.section-padding h2 {
+    text-align: center;
+    font-size: 2.5rem; 
+    margin-bottom: 50px;
+    color: var(--text-color);
+    position: relative;
+    padding-bottom: 15px;
+}
+
+.section-padding h2::after {
+    content: '';
+    width: 60px;
+    height: 4px;
+    background-color: var(--primary-color);
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    border-radius: 2px;
+}
+
+.bg-light {
+    background-color: var(--card-bg);
+}
+body:not(.dark-mode) .bg-light {
+    background-color: #ffffff;
+}
+body:not(.dark-mode) section:not(.bg-light) {
+    background-color: #f0f2f5;
+}
+body.dark-mode .bg-light {
+    background-color: #2d2d2d;
+}
+
+.about-content {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.about-content p {
+    margin-bottom: 20px;
+    text-align: justify;
+    font-size: 1.05rem;
+}
+
+/* --- 4. スキル (Skills) --- */
+.skills-category {
+    margin-bottom: 50px;
+}
+
+.skills-category h3 {
+    text-align: left;
+    margin-bottom: 25px;
+    font-size: 1.5rem;
+    color: var(--primary-color);
+    border-left: 5px solid var(--primary-color);
+    padding-left: 15px;
+}
+
+.skill-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 25px;
+    align-items: stretch;
+}
+
+.skill-item {
+    background-color: var(--bg-color);
+    padding: 25px;
+    border-radius: 12px; 
+    box-shadow: var(--shadow-light);
+    text-align: center;
+    border: 1px solid transparent; 
+    transition: all 0.3s;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+.skill-item p {
+    margin-top: auto; /* 追加: 説明文が短い場合でもバランスを保つ */
+}
+.skill-item:hover .skill-icon {
+    transform: scale(1.2) rotate(5deg);
+    transition: transform 0.3s ease;
+}
+body.dark-mode .skill-item {
+    background-color: #383838;
+}
+
+.skill-item:hover {
+    transform: translateY(-8px); 
+    border-color: var(--primary-color);
+}
+
+.skill-icon {
+    font-size: 2.5rem; 
+    color: var(--primary-color);
+    margin-bottom: 15px;
+}
+
+.certified-skill {
+    border: 2px solid var(--accent-color); 
+    background-color: rgba(56, 193, 114, 0.1) !important; 
+}
+
+.certified-skill h4 {
+    color: #28a745; 
+}
+
+/* --- 5. 強み・思考法 (Philosophy / Comparison) --- */
+.comparison-container { 
+    display: flex; 
+    justify-content: center; 
+    align-items: center; 
+    gap: 20px; 
+    margin-top: 30px; 
+}
+
+.comparison-card { 
+    flex: 1; 
+    min-width: 280px; 
+    background: var(--card-bg); 
+    border-radius: 10px; 
+    box-shadow: var(--shadow-light); 
+    overflow: hidden; 
+}
+
+.comp-header { 
+    padding: 15px; 
+    text-align: center; 
+    color: white; 
+    font-weight: bold; 
+    font-size: 1.1rem;
+}
+.construction-card .comp-header { background: #6c757d; }
+.cyber-card .comp-header { background: var(--primary-color); }
+
+.comp-body { padding: 20px; }
+.comp-body ul { list-style: none; }
+.comp-body li { 
+    margin-bottom: 12px; 
+    color: var(--secondary-color); 
+    font-size: 0.95rem; 
+    display: flex;
+    align-items: center;
+}
+.comp-body li i { margin-right: 10px; }
+.dark-mode .comp-body li { color: #ccc; }
+
+.transfer-icon { 
+    font-size: 2rem; 
+    color: var(--text-color); 
+    opacity: 0.6; 
+    transition: transform 0.3s;
+}
+
+/* --- 6. ラボ・研究実績 (Portfolio Summary & Tables) --- */
+.portfolio-summary {
+    text-align: center;
+    margin-bottom: 50px;
+    max-width: 850px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.portfolio-summary p {
+    font-size: 1.05rem;
+    margin-bottom: 25px;
+}
+
+.tech-tags {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    flex-wrap: wrap;
+}
+
+.tech-tag {
+    color: var(--primary-color);
+    border: 1px solid var(--primary-color);
+    padding: 6px 20px;
+    border-radius: 30px;
+    font-size: 0.95rem;
+    font-weight: 600;
+    background-color: transparent;
+}
+/* 進捗バーのベース */
+.progress-bar-container {
+    width: 100%;
+    background-color: rgba(128, 128, 128, 0.2);
+    border-radius: 4px;
+    height: 8px;
+    margin-top: 5px;
+    overflow: hidden;
+}
+
+/* 100%のバー */
+.progress-bar-fill-100 {
+    height: 100%;
+    background-color: var(--accent-color); /* 緑色 */
+    width: 100%;
+}
+
+/* 進行中のバー */
+.progress-bar-fill-other {
+    height: 100%;
+    background-color: var(--primary-color); /* 青色 */
+}
+
+/* 横並びレイアウト用のコンテナ */
+.certmaster-container {
+    display: flex;
+    gap: 30px;
+    align-items: flex-start;
+    margin-bottom: 40px;
+}
+
+.certmaster-card {
+    flex: 1;
+    min-width: 0; /* 子要素（テーブル等）が親の幅を押し広げるのを防ぐ */
+    background-color: var(--card-bg);
+    padding: 30px 25px;
+    border-radius: 15px;
+    box-shadow: var(--shadow-light);
+    border: 1px solid transparent;
+}
+
+/* Accordion (Details/Summary) Styles */
+.lab-details {
+    width: 100%;
+}
+
+.lab-summary {
+    cursor: pointer;
+    padding: 12px 20px;
+    background-color: rgba(23, 162, 184, 0.08);
+    color: var(--primary-color);
+    border-radius: 8px;
+    font-weight: 600;
+    list-style: none; /* Hide default arrow */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: background-color 0.3s, transform 0.2s;
+    user-select: none;
+}
+
+.lab-summary::-webkit-details-marker {
+    display: none; /* Hide default arrow in Safari */
+}
+
+.lab-summary:hover {
+    background-color: rgba(23, 162, 184, 0.15);
+}
+
+.lab-summary i {
+    transition: transform 0.3s ease;
+}
+
+/* Rotate icon when open */
+.lab-details[open] .lab-summary i {
+    transform: rotate(180deg);
+}
+
+/* Table Styles */
+.table-responsive {
+    width: 100%;
+    overflow-x: auto;
+}
+
+.certmaster-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 15px;
+    min-width: 500px;
+}
+
+.certmaster-table th {
+    padding: 12px 10px;
+    text-align: left;
+    border-bottom: 2px solid var(--primary-color);
+    font-weight: 600;
+    color: var(--text-color);
+    font-size: 0.95rem;
+}
+
+.certmaster-table td {
+    padding: 10px;
+    border-bottom: 1px solid rgba(128, 128, 128, 0.2);
+    color: var(--text-color);
+    font-size: 0.9rem;
+}
+
+.certmaster-table tbody tr {
+    transition: background-color 0.2s;
+}
+
+.certmaster-table tbody tr:hover {
+    background-color: rgba(23, 162, 184, 0.08);
+}
+
+.progress-100 { 
+    color: var(--accent-color); 
+    font-weight: 700; 
+}
+
+.progress-other { 
+    color: var(--primary-color); 
+    font-weight: 700; 
+}
+
+.lab-type-badge {
+    display: inline-block;
+    padding: 3px 8px;
+    border-radius: 6px;
+    font-size: 0.8em;
+    font-weight: 600;
+    background-color: rgba(23, 162, 184, 0.1);
+    color: var(--primary-color);
+    white-space: nowrap;
+}
+
+/* --- 7. 目標 (Goals) --- */
+.goal-list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 30px;
+}
+
+.goal-item {
+    flex: 1 1 300px;
+    background-color: var(--bg-color);
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: var(--shadow-light);
+    text-align: center;
+}
+body.dark-mode .goal-item {
+    background-color: #383838;
+}
+
+.goal-icon {
+    font-size: 2.5rem;
+    color: var(--primary-color);
+    margin-bottom: 20px;
+}
+
+/* --- 8. 連絡先とフッター --- */
+.contact-info { display: flex; justify-content: center; gap: 20px; flex-wrap: wrap; }
+.contact-btn {
+    padding: 10px 20px; border-radius: 5px;
+    border: 1px solid #ddd; color: var(--text-color);
+    display: flex; align-items: center; gap: 10px;
+}
+.contact-btn:hover { border-color: var(--primary-color); color: var(--primary-color); }
+
+/* --- 9. モバイル対応 (Mobile Responsive) --- */
+@media (max-width: 992px) {
+    /* タブレット・スマホ幅では横並びを解除して縦並びにする */
+    .certmaster-container {
+        flex-direction: column;
+    }
+    
+    .certmaster-card {
+        width: 100%;
+    }
+}
+
+@media (max-width: 768px) {
+    /* Navbar Styles */
+    .navbar {
+        padding: 10px 20px;
+    }
+
+    .nav-links {
+        display: none;
+        flex-direction: column;
+        width: 100%;
+        position: absolute;
+        top: 80px; 
+        left: 0;
+        background-color: var(--card-bg);
+        border-bottom: 1px solid rgba(0,0,0,0.1);
+        padding: 20px;
+        box-shadow: 0 10px 10px rgba(0,0,0,0.1);
+        z-index: 999;
+    }
+
+    .nav-links.active {
+        display: flex;
+        animation: slideDown 0.3s ease forwards;
+    }
+    
+    @keyframes slideDown {
+        from { opacity: 0; transform: translateY(-10px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+
+    .nav-links li {
+        margin: 15px 0;
+        width: 100%;
+        text-align: center;
+    }
+    
+    .dark-mode-btn {
+        margin-left: 0;
+        margin-top: 10px;
+    }
+
+    .burger-menu {
+        display: block;
+    }
+
+    /* Hero Section */
+    .hero-content h1 {
+        font-size: 2rem;
+    }
+    
+    .tagline {
+        font-size: 1rem;
+        padding: 0 10px;
+    }
+
+    .profile-picture {
+        width: 150px;
+        height: 150px;
+    }
+
+    /* Philosophy Section Mobile Layout */
+    .comparison-container {
+        flex-direction: column; 
+    }
+
+    .comparison-card {
+        width: 100%;
+        min-width: auto;
+    }
+
+    .transfer-icon {
+        transform: rotate(90deg); 
+        margin: 15px 0;
+    }
+
+    /* General Adjustments */
+    .section-padding h2 {
+        font-size: 2rem;
+    }
+} 
+/*スクロール時の「フワッと」表示（フェードイン）*/
+.fade-in {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+}
+
+.fade-in.appear {
+    opacity: 1;
+    transform: translateY(0);
+}
